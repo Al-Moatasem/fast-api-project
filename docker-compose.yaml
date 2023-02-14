@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    # image: fastapi
+    container_name: api_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: always
+
+  postgres:
+    container_name: pg_db
+    image: postgres:13
+    ports:
+      - 5430:5432
+    user: ${PG_USERNAME}
+    environment:
+      # POSTGRES_USER: ${PG_USERNAME}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DATABASE:-odocr} # if doesn't exist use `odocr`
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 5s
+      retries: 5
+  
+  # pgadmin:
+  #   container_name: pg_admin
+  #   image: dpage/pgadmin4
+  #   ports:
+  #     - 5050:80
+  #   environment:
+  #     - PG_ADMIN_DEFAULT_EMAIL: ${PG_ADMIN_EMAIL}
+  #     - PG_ADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
+  #   depends_on:
+  #     - postgres
+
+
+volumes:
+  postgres-db-volume:
