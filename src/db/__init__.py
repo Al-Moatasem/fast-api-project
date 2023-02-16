@@ -1,4 +1,6 @@
 from src.api.users.orm import User
 from src.db.pg_connect import Base, engine
 
-Base.metadata.create_all(bind=engine)
+# As we are going to use Alembic in the migration process,
+#   we will let it create the tables, and any other changes
+# Base.metadata.create_all(bind=engine)
