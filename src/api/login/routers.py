@@ -29,9 +29,15 @@ def login(
         )
 
     # validate the password
-    LoginPasswordHandler(
+    verify_password = LoginPasswordHandler(
         plain_password=credentials.password, hashed_password=user.password
     ).verify_password()
+
+    if not verify_password:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Something went wrong. Please verify that your username and password are correct.",
+        )
 
     # generate a token
     payload = {"sub": user.id, "role": user.role}
