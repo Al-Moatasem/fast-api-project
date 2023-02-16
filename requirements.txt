@@ -16,7 +16,7 @@ psycopg2-binary==2.9.5 # for linux
 
 # password hashing
 passlib==1.7.4
-bcrypt==4.0.1
+bcrypt==4.0.1 # alternative: argon2==0.1.10
 
 # for JWT token, alternative: python-jose
 PyJWT==2.6.0
