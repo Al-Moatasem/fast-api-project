@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from src.api.images.routers import router as images_router
 from src.api.login.routers import router as login_router
 from src.api.users.routers import router as users_router
 from src.configs.config import settings
@@ -11,6 +12,7 @@ app.description = settings.app_description
 
 app.include_router(users_router)
 app.include_router(login_router)
+app.include_router(images_router)
 app.add_middleware(middleware_class=AuthorizeRequestMiddleware)
 
 

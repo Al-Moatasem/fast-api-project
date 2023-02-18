@@ -20,3 +20,7 @@ bcrypt==4.0.1 # alternative: argon2==0.1.10
 
 # for JWT token, alternative: python-jose
 PyJWT==2.6.0
+
+
+# images
+Pillow==9.4.0

@@ -1,5 +1,6 @@
 import os
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic import BaseSettings, Field
 
@@ -7,6 +8,9 @@ from pydantic import BaseSettings, Field
 class Settings(BaseSettings):
     env: str = Field(default="dev")
     debug: bool = Field(default=True)
+
+    base_dir: Path = Path(__file__).parent.parent.parent
+    uploaded_images_dir: Path = base_dir / "uploaded_images"
 
     # FastAPI
     app_host: str = Field(default="0.0.0.0")
@@ -47,6 +51,9 @@ def get_settings():
     """
     Load project settings and configuration, default environment is Development `dev`
     """
+
+    Settings().uploaded_images_dir.mkdir(exist_ok=True, parents=True)
+
     env = os.getenv("env", default="dev")
 
     if env == "dev":
