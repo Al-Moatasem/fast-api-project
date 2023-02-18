@@ -40,7 +40,14 @@ class JWTCookieBackend(AuthenticationBackend):
         return AuthCredentials(roles), SimpleUser(user_id)
 
 
-EXCLUDE_URL_PATH = ["/", "/docs", "/openapi.json", "/api/users/", "/api/login/"]
+EXCLUDE_URL_PATH = [
+    "/",
+    "/docs",
+    "/redoc",
+    "/openapi.json",
+    "/api/users/",
+    "/api/login/",
+]
 
 
 class AuthorizeRequestMiddleware(BaseHTTPMiddleware):
