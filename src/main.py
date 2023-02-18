@@ -7,6 +7,7 @@ from src.middleware.auth import AuthorizeRequestMiddleware
 
 app_debug = True if settings.env != "prod" else False
 app = FastAPI(title=settings.app_title, debug=app_debug)
+app.description = settings.app_description
 
 app.include_router(users_router)
 app.include_router(login_router)
