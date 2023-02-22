@@ -11,6 +11,8 @@ class Settings(BaseSettings):
 
     base_dir: Path = Path(__file__).parent.parent.parent
     uploaded_images_dir: Path = base_dir / "uploaded_images"
+    save_detections_bbox_dir:Path = base_dir / "detections_bbox"
+    ml_dir: Path = base_dir / "ml"  # machine learning
 
     # FastAPI
     app_host: str = Field(default="0.0.0.0")
@@ -29,6 +31,10 @@ class Settings(BaseSettings):
     jwt_secret_key: str = Field(...)
     jwt_algorithm: str = Field(...)  # RS256 uses Private/Public keys, HS256 uses Secret
     jwt_access_token_expire_minutes: int = 60 * 24  # 1 day
+
+    # ML Models
+    onnx_coco_model_path: str = Field(...)
+    onnx_coco_classes_list_path: str = Field(...)
 
     @property
     def pg_connection_url(self) -> str:
@@ -53,6 +59,7 @@ def get_settings():
     """
 
     Settings().uploaded_images_dir.mkdir(exist_ok=True, parents=True)
+    Settings().save_detections_bbox_dir.mkdir(exist_ok=True, parents=True)
 
     env = os.getenv("env", default="dev")
 
