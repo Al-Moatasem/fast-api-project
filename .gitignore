@@ -2,6 +2,15 @@ __draft/**
 __notes/**
 fast_api_project.code-workspace
 
+uploaded_images/**
+detections_bbox/**
+
+# machine learning models should be ignored, 
+#   but for demo purposes, I have kept them tracked
+ml/**
+!ml/coco_model_classes.txt
+!ml/coco_model.onnx
+
 
 # Source: https://github.com/github/gitignore/blob/main/Python.gitignore
 
