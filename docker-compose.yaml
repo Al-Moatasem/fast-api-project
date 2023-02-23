@@ -3,7 +3,7 @@ version: "3.8"
 services:
   app:
     build: .
-    # image: fastapi
+    image: fastapi
     container_name: api_app
     ports:
       - "8000:8000"
@@ -31,7 +31,6 @@ services:
       test: [ "CMD", "pg_isready" ]
       interval: 5s
       retries: 5
-  
   # pgadmin:
   #   container_name: pg_admin
   #   image: dpage/pgadmin4

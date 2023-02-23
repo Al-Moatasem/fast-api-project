@@ -24,3 +24,10 @@ PyJWT==2.6.0
 
 # images
 Pillow==9.4.0
+opencv-python==4.7.0.68
+
+# ML
+onnx==1.13.0
+
+# Misc
+numpy==1.24.2
