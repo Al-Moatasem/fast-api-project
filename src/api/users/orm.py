@@ -10,11 +10,9 @@ from src.db.pg_connect import Base
 class User(Base, MixinTimestamp):
     __tablename__ = "users"
 
-    id = Column(
-        Integer, primary_key=True, nullable=False, autoincrement=True, index=True
-    )
+    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     name = Column(String, nullable=False)
-    email = Column(String, nullable=False, unique=True, index=True)
+    email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     role = Column(String, server_default="user", nullable=False)
     is_active = Column(Boolean, server_default="FALSE", nullable=False)
