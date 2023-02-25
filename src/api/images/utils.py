@@ -1,6 +1,8 @@
 import hashlib
 import io
 import os
+import shutil
+import uuid
 
 from fastapi import File, HTTPException, UploadFile, status
 from PIL import Image, ImageOps
@@ -20,9 +22,14 @@ def hash_file_md5(file: str) -> str:
     return hashed
 
 
+def delete_file(file: str) -> None:
+    os.remove(file)
+
+
 async def upload_image(file: UploadFile):
-    file_name = file.filename  # file_name.ext
-    basename, file_extension = file_name.split(".")
+    original_file_name = file.filename  # file_name.ext
+    file_extension = original_file_name.split(".")[-1]
+    basename = original_file_name.split(".")[:-1]
 
     # validating the file extension
     if file_extension.lower() not in ["png", "jpeg", "jpg"]:
@@ -54,7 +61,11 @@ async def upload_image(file: UploadFile):
     # the above line, and the below line, don't return the same hash value
     hashed_value = hashlib.md5(image.tobytes()).hexdigest()
 
-    dest_file_path = str(UPLOAD_DIR / file_name)
+    saved_file_name = f"{str(uuid.uuid1())}__{original_file_name}"
+    dest_file_path = str(UPLOAD_DIR / saved_file_name)
+
     image.save(dest_file_path)
 
-    return file_name, basename, file_extension, hashed_value
+    size_bytes = get_file_size_bytes(dest_file_path)
+
+    return original_file_name, saved_file_name, dest_file_path, hashed_value, size_bytes
