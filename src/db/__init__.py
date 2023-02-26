@@ -1,3 +1,4 @@
+from src.api.images.orm import UploadedImage
 from src.api.users.orm import User
 from src.db.pg_connect import Base, engine
 
