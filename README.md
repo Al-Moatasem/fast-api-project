@@ -1,12 +1,13 @@
 # FastAPI Project
 
-An experimental project for FastAPI
+An experimental project for FastAPI application with a pre-trained object detection model (the training was made by the team of YOLOv5 project)
 **What does this application do?**
 Currently the application provides:
 - Managing users operations (create/list/delete)
 - Using Postgres database to store the data
 - User login and generating tokens.
 - Securing certain endpoints, and making them available for authorized users only
+- Users can upload images, and the ML model will draw boxes on the detected objects (screenshot below)
 
 
 **What does this application don't cover?**

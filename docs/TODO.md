@@ -1,0 +1,26 @@
+# Ideas / TODOs
+- For endpoints with pagination, add to the response (body or header) a url to the next page.
+  - Make sure that the next page will have data in its response
+- Requests that took more than `n` minutes should be terminated.
+- Tests
+  - Testing endpoints
+    - test the status code for the response
+    - test the schema of the response body
+    - test the content of the response body
+  - Either create a testing database, or test on the production :(, but any write action (INSERT/UPDATE/DELETE) has to be fixed
+  - Testing users
+    - create a user
+    - user login
+      - regular endpoint tests
+      - validate the token, user id in the token matches the user id in the response (in case of the schema includes the user id), the token type (bearer)
+      - test successful login and failed login
+      - test multiple scenarios valid email/pass, valid email/invalid pass, invalid email/pass, missing email/valid pass, valid email/missing pass
+    - endpoints that require token
+      - create two pytest fixtures
+        - generates a valid token
+        - create an authorized client to be used instead of `client = TestClient()`
+      - test if unauthorized user has access to a protected endpoint
+- In `src\api\images\routers.py > upload_image_view()` consider
+  - setting a mechanism to receive classes to be detected, current logic is a hardcoded `['all']`
+  - The endpoint should handle uploading the image without detection, detection process should be handled by a dedicated endpoint.
+- Build Pydantic schemas for uploaded images, detected objects, ...
