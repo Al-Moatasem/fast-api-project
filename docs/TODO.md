@@ -1,4 +1,4 @@
-# Ideas
+# Ideas / TODOs
 - For endpoints with pagination, add to the response (body or header) a url to the next page.
   - Make sure that the next page will have data in its response
 - Requests that took more than `n` minutes should be terminated.
@@ -20,3 +20,6 @@
         - generates a valid token
         - create an authorized client to be used instead of `client = TestClient()`
       - test if unauthorized user has access to a protected endpoint
+- In `src\api\images\routers.py > upload_image_view()` consider
+  - setting a mechanism to receive classes to be detected, current logic is a hardcoded `['all']`
+  - The endpoint should handle uploading the image without detection, detection process should be handled by a dedicated endpoint.
