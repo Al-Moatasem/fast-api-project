@@ -23,3 +23,4 @@
 - In `src\api\images\routers.py > upload_image_view()` consider
   - setting a mechanism to receive classes to be detected, current logic is a hardcoded `['all']`
   - The endpoint should handle uploading the image without detection, detection process should be handled by a dedicated endpoint.
+- Build Pydantic schemas for uploaded images, detected objects, ...
