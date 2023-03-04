@@ -34,8 +34,14 @@ def on_startup():
 
     # Adding the model to the application
     # call it request.app.state. ....
-    app.state.onnx_coco_class_list = onnx_coco_class_list
-    app.state.onnx_coco_model = onnx_coco_model
+    # TODO: consider creating a class
+    app.state.ml_onnx_coco = {
+        "name": "onnx_coco",
+        "version": "1.0.0",
+        "class_list": onnx_coco_class_list,
+        "model": onnx_coco_model,
+        "minimum_confidence": 0.4,  # use the maximum value of minimum_confidence and passed threshold from the user
+    }
     app.state.bbox_colors = COLORS
 
 
